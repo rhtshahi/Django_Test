@@ -1,18 +1,25 @@
 from django.shortcuts import render, HttpResponse
+from django.views import View
+from .models import Book, Author
 
 # Create your views here.
-def home(page):
+def home(Home_page):
     # return HttpResponse('This is home page')
-    return render(page, 'index.html')
+    return render(Home_page, 'index.html')
 
-def about(page):
+def about(About_page):
     # return HttpResponse('This is home page')
-    return render(page, 'about.html')
+    return render(About_page, 'about.html')
 
-def bookList(page):
+def bookList(Book_page):
     # return HttpResponse('Books')
-    return render(page, 'books.html')
+    queryset = Book.objects.all()
+    context_object_name = "book_list"
+    return render(Book_page, 'books.html')
 
-def author(page):
+
+def author(Author_page):
     # return HttpResponse('Author Page')
-    return render(page, 'author.html')
+    return render(Author_page, 'author.html')
+
+    
