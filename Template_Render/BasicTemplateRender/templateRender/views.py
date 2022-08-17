@@ -1,9 +1,12 @@
+from multiprocessing import context
 from django.shortcuts import render, HttpResponse
 
 # Create your views here.
 def home(pages):
     # return HttpResponse('HOME')
-    return render(pages, 'index.html')
+    #-----use of variable-----#
+    context={'variable':'This is sent from view!!!'}
+    return render(pages, 'index.html', context)
 
 def about(pages):
     # return HttpResponse('About')
