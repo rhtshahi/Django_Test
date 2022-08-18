@@ -1,6 +1,7 @@
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, HttpResponse, redirect
 from django.views import View
 from .models import Book, Author
+from .forms import BookForm
 
 # Create your views here.
 def home(Home_page):
@@ -14,11 +15,27 @@ def about(About_page):
 def bookList(Book_page):
     # return HttpResponse('Books')
     queryset = Book.objects.all()
-    context = {"book_list":queryset}
+    context = {"book_list":queryset }
     return render(Book_page, 'books.html',context)
 
 
 def author(Author_page):
     # return HttpResponse('Author Page')
-    return render(Author_page, 'author.html')
+    queryset = Author.objects.all()
+    context = {'author_name':queryset}
+    return render(Author_page, 'author.html', context)
 
+def bookCreate(create_book_page):
+    form = BookForm()
+
+    if create_book_page.method == 'POST':
+        # print('Printing Post: ', create_book_page.POST)
+        form = BookForm(create_book_page.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/books')
+
+    context ={'form': form}
+
+    return render(create_book_page, 'book_create.html', context)
