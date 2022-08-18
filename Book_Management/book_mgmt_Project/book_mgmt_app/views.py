@@ -14,12 +14,11 @@ def about(About_page):
 def bookList(Book_page):
     # return HttpResponse('Books')
     queryset = Book.objects.all()
-    context_object_name = "book_list"
-    return render(Book_page, 'books.html')
+    context = {"book_list":queryset}
+    return render(Book_page, 'books.html',context)
 
 
 def author(Author_page):
     # return HttpResponse('Author Page')
     return render(Author_page, 'author.html')
 
-    
