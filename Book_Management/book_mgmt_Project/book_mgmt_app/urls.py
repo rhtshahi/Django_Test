@@ -10,5 +10,6 @@ urlpatterns = [
     path('author/', views.author, name='author'),
     path('about/', views.about, name='about'),
     path('book_create/', views.bookCreate, name='book_create'),
+    path('book_update/<str:pk>/', views.bookUpdate, name='book_update'),
 
 ]

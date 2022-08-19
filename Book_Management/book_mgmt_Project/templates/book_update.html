@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
-{% block title %}Add Books{% endblock title %}
+{% block title %}Edit Books{% endblock title %}
 
 {% block body %}
-<h1>Add Books:</h1>
+<h1>Edit Books:</h1>
+
 <div class="formBody my-4 mx-4">
     <form action="" method="post" id="bookForm">
         {% csrf_token %}
@@ -11,4 +12,5 @@
         <input type="submit" name="Submit">
     </form>
 </div>
+
 {% endblock body %}

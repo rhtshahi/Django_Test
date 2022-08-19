@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render, HttpResponse, redirect
 from django.views import View
 from .models import Book, Author
@@ -39,3 +40,21 @@ def bookCreate(create_book_page):
     context ={'form': form}
 
     return render(create_book_page, 'book_create.html', context)
+
+def bookUpdate(update_book_page, pk):
+
+    book=Book.objects.get(id=pk)
+    form = BookForm(instance=book)
+
+    if update_book_page.method == 'POST':
+        # print('Printing Post: ', create_book_page.POST)
+        form = BookForm(update_book_page.POST, instance=book)
+
+        if form.is_valid():
+            form.save()
+            return redirect('/books')
+    
+    
+    
+    context={'form': form}
+    return render(update_book_page, 'book_update.html', context)
