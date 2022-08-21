@@ -24,6 +24,7 @@ def author(Author_page):
     # return HttpResponse('Author Page')
     queryset = Author.objects.all()
     context = {'author_name':queryset}
+    # return render(Author_page, 'author.html')
     return render(Author_page, 'author.html', context)
 
 def bookCreate(create_book_page):
@@ -54,7 +55,14 @@ def bookUpdate(update_book_page, pk):
             form.save()
             return redirect('/books')
     
-    
-    
     context={'form': form}
     return render(update_book_page, 'book_update.html', context)
+
+def AuthorDetails(author_details_page, pk):
+    author_id=Author.objects.get(id=pk)
+    # book_id=Book.objects.all()
+    context={
+        'author_id':author_id,
+    }
+
+    return render(author_details_page, 'author_details.html', context)

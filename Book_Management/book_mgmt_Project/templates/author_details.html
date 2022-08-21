@@ -20,13 +20,15 @@
 {% endblock style %}
 
 {% block body %}
-<h1>Authors: </h1>
+<h1>Author Details: </h1>
 
 {% comment %} <p>This is Author page.</p> {% endcomment %}
 
-{% for author in author_name %}
+<p>Name: {{author_id.name}}</p>
 
-   <a href="{% url 'author_details' author.id %}"> <p>{{author.name}}</p>
+{% for book in book_list %}
+
+<p>Name: {{book.name}}</p>
 
 {% endfor %}
 
