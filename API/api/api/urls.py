@@ -1,4 +1,4 @@
-"""book_mgmt_Project URL Configuration
+"""api URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/4.1/topics/http/urls/
@@ -16,12 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-admin.site.site_header = "Admin Portal | Book Management"
-admin.site.site_title = "This is Admin Portal"
-admin.site.index_title = "Welcome to Admin Portal"
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('api.urls'), name='api'),
-    path('', include('book_mgmt_app.urls'), name='book_mgmt_app'),
+    path('api/', include('rest_framework.urls'), name='rest_framework')
 ]

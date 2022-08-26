@@ -14,40 +14,53 @@ def index(request):
 
 def registerPage(request):
     # return render(request, 'register.html')
-    form = CreateUserForm()
+    if request.user.is_authenticated:
+        return redirect('home')
 
-    if request.method=='POST':
-        form = CreateUserForm(request.POST)
+    else:
 
-        if form.is_valid():
-            form.save()
-            user_name = form.cleaned_data.get('username')
-            messages.success(request, 'Account was created for ' + user_name )
-            return redirect('login')
+        form = CreateUserForm()
 
-    context={'form':form}
-    return render(request, 'register.html', context)
+        if request.method=='POST':
+            form = CreateUserForm(request.POST)
+
+            if form.is_valid():
+                form.save()
+                user_name = form.cleaned_data.get('username')
+                messages.success(request, 'Account was created for ' + user_name )
+                return redirect('login')
+
+        context={'form':form}
+        return render(request, 'register.html', context)
 
 def loginPage(request):
 
-    if request.method=='POST':
-        username=request.POST.get('username')
-        password=request.POST.get('password')
-        print(username, password)
+    if request.user.is_authenticated:
+        return redirect('home')
 
-        user = authenticate(username=username, password=password)
+    else:
 
-        if user is not None:
-            login(request, user)
-            return redirect('home')#redirect is not for html file but for name of url or path
+        if request.method=='POST':
+            username=request.POST.get('username')
+            password=request.POST.get('password')
+            print(username, password)
 
-        else:
-            messages.info(request, 'Incorrect Username/Password!!!')
-            return render(request, 'login.html')
+            user = authenticate(username=username, password=password)
 
-    return render(request, 'login.html')
+            if user is not None:
+                login(request, user)
+                return redirect('home')#redirect is not for html file but for name of url or path
+
+            else:
+                messages.info(request, 'Incorrect Username/Password!!!')
+                return render(request, 'login.html')
+
+        return render(request, 'login.html')
 
 
 def logoutUser(request):
     logout(request)
     return redirect('login')
+
+def userPage(request):
+    return render(request, 'user.html')

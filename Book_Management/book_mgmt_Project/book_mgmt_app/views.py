@@ -61,6 +61,9 @@ def bookUpdate(update_book_page, pk):
 def AuthorDetails(author_details_page, pk):
     author_id=Author.objects.get(id=pk)
     # book_id=Book.objects.all()
+    books = author_id.book_author.all()  # author_id.book_set.all() #Book.objects.filter(author=author_id)
+    print(books)
+    
     context={
         'author_id':author_id,
     }

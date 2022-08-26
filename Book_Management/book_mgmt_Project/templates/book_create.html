@@ -8,6 +8,7 @@
     <form action="" method="post" id="bookForm">
         {% csrf_token %}
         {{form}}
+        {% comment %} <input  {% endcomment %}
         <input type="submit" name="Submit">
     </form>
 </div>
